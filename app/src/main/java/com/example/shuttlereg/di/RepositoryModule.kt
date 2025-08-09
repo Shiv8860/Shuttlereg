@@ -2,10 +2,12 @@ package com.example.shuttlereg.di
 
 import com.example.shuttlereg.data.repository.AuthRepositoryImpl
 import com.example.shuttlereg.data.repository.PhotoRepositoryImpl
+import com.example.shuttlereg.data.repository.RegistrationRepositoryImpl
 import com.example.shuttlereg.data.repository.UserRepositoryImpl
 import com.example.shuttlereg.data.repository.TournamentRepositoryImpl
 import com.example.shuttlereg.domain.repository.AuthRepository
 import com.example.shuttlereg.domain.repository.PhotoRepository
+import com.example.shuttlereg.domain.repository.RegistrationRepository
 import com.example.shuttlereg.domain.repository.UserRepository
 import com.example.shuttlereg.domain.repository.TournamentRepository
 import dagger.Binds
@@ -42,10 +44,9 @@ abstract class RepositoryModule {
         photoRepositoryImpl: PhotoRepositoryImpl
     ): PhotoRepository
     
-    // TODO: Add RegistrationRepository binding when implemented
-    // @Binds
-    // @Singleton
-    // abstract fun bindRegistrationRepository(
-    //     registrationRepositoryImpl: RegistrationRepositoryImpl
-    // ): RegistrationRepository
+    @Binds
+    @Singleton
+    abstract fun bindRegistrationRepository(
+        registrationRepositoryImpl: RegistrationRepositoryImpl
+    ): RegistrationRepository
 }
