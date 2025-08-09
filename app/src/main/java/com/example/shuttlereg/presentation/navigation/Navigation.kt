@@ -12,6 +12,7 @@ import com.example.shuttlereg.presentation.ui.screens.*
 import com.example.shuttlereg.presentation.viewmodel.AuthViewModel
 
 sealed class Screen(val route: String) {
+    object Splash : Screen("splash")
     object Auth : Screen("auth")
     object TournamentList : Screen("tournament_list")
     object Registration : Screen("registration/{tournamentId}") {
@@ -29,8 +30,19 @@ fun ShuttleRegNavigation(
     
     NavHost(
         navController = navController,
-        startDestination = if (isSignedIn) Screen.TournamentList.route else Screen.Auth.route
+        startDestination = Screen.Splash.route
     ) {
+        composable(Screen.Splash.route) {
+            SplashScreen(
+                onSplashComplete = {
+                    navController.navigate(
+                        if (isSignedIn) Screen.TournamentList.route else Screen.Auth.route
+                    ) {
+                        popUpTo(Screen.Splash.route) { inclusive = true }
+                    }
+                }
+            )
+        }
         composable(Screen.Auth.route) {
             AuthScreen(
                 onAuthSuccess = {
