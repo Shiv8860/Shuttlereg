@@ -18,7 +18,9 @@ sealed class Screen(val route: String) {
     object Registration : Screen("registration/{tournamentId}") {
         fun createRoute(tournamentId: String) = "registration/$tournamentId"
     }
+    object MyMatches : Screen("my_matches")
     object Profile : Screen("profile")
+    object AdminDashboard : Screen("admin_dashboard")
 }
 
 @Composable
@@ -60,8 +62,15 @@ fun ShuttleRegNavigation(
                 },
                 onNavigateToAuth = {
                     navController.navigate(Screen.Profile.route)
+                },
+                onNavigateToMatches = {
+                    navController.navigate(Screen.MyMatches.route)
                 }
             )
+        }
+        
+        composable(Screen.MyMatches.route) {
+            MyMatchesScreen()
         }
         
         composable(Screen.Registration.route) { backStackEntry ->

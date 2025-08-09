@@ -26,6 +26,7 @@ import java.time.format.DateTimeFormatter
 fun TournamentListScreen(
     onTournamentSelected: (Tournament) -> Unit,
     onNavigateToAuth: () -> Unit,
+    onNavigateToMatches: () -> Unit = {},
     viewModel: TournamentViewModel = hiltViewModel()
 ) {
     val uiState by viewModel.uiState.collectAsState()
